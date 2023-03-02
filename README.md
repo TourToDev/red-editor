@@ -1,1 +1,1 @@
-# webpack-project-setup
+# Red editor bootstrap by webpack-project-setup
