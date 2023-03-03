@@ -1,10 +1,32 @@
-import React from 'react';
-import MovableSpace from './MovableSpace';
+import React, { useState } from "react";
+import MovableSpace from "./MovableSpace";
+
+const createMovableElement = () => {
+  const newMovable = {
+    position: {
+      x: 10,
+      y: 20,
+    },
+    properties: {},
+    styles: {},
+    id: new Date().getTime(),
+  };
+  return newMovable;
+};
 
 export default function App() {
-    return (
-        <div>
-            <MovableSpace/>
-        </div>
-    )
+  const [movableElements, setMovableElements] = useState([]);
+  const addElement = () => {
+    const newElement = createMovableElement();
+    setMovableElements((prev) => prev.concat([newElement]));
+  };
+  return (
+    <div>
+      <button onClick={addElement}>Add one</button>
+      <MovableSpace
+        movableElements={movableElements}
+        setMovableElements={setMovableElements}
+      />
+    </div>
+  );
 }

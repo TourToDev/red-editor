@@ -1,25 +1,12 @@
 import React, { useState } from "react";
 import "./movable-space.less";
 
-const movableElements = [
-  {
-    position: {
-      x: 10,
-      y: 20,
-    },
-    properties: {},
-    styles: {},
-    id: new Date().getTime(),
-  },
-];
-
-export default function MovableSpace() {
-  const [movableExistents, setMovableExistents] = useState(movableElements);
+export default function MovableSpace({movableElements,setMovableElements}) {
   const handleMouseDownOnMovable = (existentId) => {
     const moveHandler = (e) => {
       console.log("moveEvents");
       console.log(e);
-      setMovableExistents((prev) => {
+      setMovableElements((prev) => {
         return prev.map((item) => {
           if (item.id === existentId) {
             return {
@@ -41,8 +28,8 @@ export default function MovableSpace() {
   };
   return (
     <div className="movable-space">
-        {JSON.stringify(movableExistents)}
-      {movableExistents.map((item) => (
+        {JSON.stringify(movableElements)}
+      {movableElements.map((item) => (
         <button
           className="movable-element"
           style={{
