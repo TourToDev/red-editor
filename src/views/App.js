@@ -1,31 +1,19 @@
 import React, { useState } from "react";
+import { addNewElement } from "../store/features/movable/movableSlice";
+import { Counter } from "./Counter";
 import MovableSpace from "./MovableSpace";
-
-const createMovableElement = () => {
-  const newMovable = {
-    position: {
-      x: 10,
-      y: 20,
-    },
-    properties: {},
-    styles: {},
-    id: new Date().getTime(),
-  };
-  return newMovable;
-};
+import { useSelector, useDispatch } from 'react-redux'
 
 export default function App() {
-  const [movableElements, setMovableElements] = useState([]);
-  const addElement = () => {
-    const newElement = createMovableElement();
-    setMovableElements((prev) => prev.concat([newElement]));
-  };
+  const movableElements = useSelector((state) => state.movable.movableElements);
+  const dispatch = useDispatch();
+
   return (
     <div>
-      <button onClick={addElement}>Add one</button>
+      <button onClick={() => dispatch(addNewElement())}>Add one</button>
+      <Counter></Counter>
       <MovableSpace
         movableElements={movableElements}
-        setMovableElements={setMovableElements}
       />
     </div>
   );
